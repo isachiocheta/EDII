@@ -1,169 +1,262 @@
-# Pesquisa e Ordenação de Dados: Arquivos
+# Estrutura de Dados II
 
-Este repositório contém notas de estudo e conceitos fundamentais sobre a Unidade 3.1 da disciplina de Pesquisa e Ordenação de Dados, focada na estrutura e gerenciamento de arquivos.
+## Estrutura e Organização de Arquivos
 
----
-
-## Sumário
-
-* [Conceitos de Dados](https://www.google.com/search?q=%23-conceitos-de-dados)
-* [Hierarquia de Memória](https://www.google.com/search?q=%23-hierarquia-de-mem%C3%B3ria)
-* [Estrutura do Disco Rígido](https://www.google.com/search?q=%23-estrutura-do-disco-r%C3%ADgido)
-* [Tempos de Acesso](https://www.google.com/search?q=%23-tempos-de-acesso)
-* [Sistemas de Arquivos](https://www.google.com/search?q=%23-sistemas-de-arquivos)
-* [Organização de Registros](https://www.google.com/search?q=%23-organiza%C3%A7%C3%A3o-de-registros)
+Este repositório apresenta um estudo aprofundado sobre **arquivos, armazenamento de dados e técnicas de organização**, abordando desde a estrutura física do disco até os modelos de organização primária e secundária de arquivos de registros.
 
 ---
 
-## Conceitos de Dados
+## Objetivo
 
-Os dados são classificados conforme sua persistência no sistema:
+Compreender como os dados são armazenados, organizados e acessados fisicamente e logicamente, analisando:
 
-* 
-**Dados Transientes:** Mantidos por tempo limitado durante a execução de um programa.
-
-
-* 
-**Dados Persistentes:** Mantidos por longos períodos, representados em linguagens de programação como registros e arquivos.
-
-
-* 
-**Mapeamento:** O sistema operacional (SO) realiza a ponte entre a representação lógica (arquivos) e a representação física (mídia).
-
-
+* Diferença entre dados transientes e persistentes
+* Hierarquia de memória
+* Estrutura física do disco rígido
+* Operações de I/O
+* Sistemas de arquivos
+* Organização de registros e métodos de acesso
 
 ---
 
-## Mídias de Armazenamento
+# 1. Dados
 
-### Armazenamento Primário (Memória Interna)
+## 1.1 Classificação
 
-Operada diretamente pela CPU, possui acesso rápido, mas capacidade limitada e natureza volátil.
+### Dados Transientes
 
-* 
-**Registradores:** Localizados no topo da hierarquia.
+Mantidos temporariamente durante a execução de um programa (memória volátil).
 
+### Dados Persistentes
 
-* 
-**Cache:** Acelera o desempenho retendo dados frequentes.
+Mantidos por longos períodos, armazenados fisicamente em mídias não voláteis e representados logicamente como registros e arquivos.
 
+## 1.2 Representação
 
-* 
-**RAM:** Armazena temporariamente programas e dados em uso.
-
-
-
-### Armazenamento Secundário (Memória Externa)
-
-Não volátil e de maior capacidade, porém com acesso mais lento.
-
-* 
-**Discos Magnéticos:** HDs.
-
-
-* 
-**Memória Flash:** SSDs e Pen drives.
-
-
-* 
-**Discos Óticos:** CDs e DVDs.
-
-
-* 
-**Fitas Magnéticas:** Acesso sequencial, ideal para backups e registros históricos.
-
-
+* **Representação Física:** armazenamento em mídia (disco, SSD, etc.)
+* **Representação Lógica:** abstração em arquivos e registros
+* O sistema operacional realiza o mapeamento entre essas duas camadas.
 
 ---
 
-## Estrutura do Disco Rígido (HD)
+# 2. Mídias de Armazenamento
 
-O disco rígido possui uma organização física específica que impacta na velocidade de leitura:
+## 2.1 Armazenamento Primário
 
-* 
-**Trilha:** Círculos concêntricos na superfície do disco.
+* Operado diretamente pela CPU
+* Volátil
+* Alta velocidade
+* Baixa capacidade
 
+Componentes:
 
-* 
-**Cilindro:** Conjunto de trilhas de mesmo diâmetro em diferentes pratos; dados aqui são recuperados mais rápido.
+* Registradores
+* Cache
+* Memória RAM
 
+## 2.2 Armazenamento Secundário
 
-* 
-**Setor:** Divisão física da trilha que não pode ser alterada.
+* Não volátil
+* Maior capacidade
+* Acesso mais lento
+* Dados precisam ser carregados para a memória principal antes do processamento
 
+Tipos:
 
-* 
-**Bloco (ou Página):** Divisão lógica feita pelo SO (múltiplo do setor) para transferência de dados.
-
-
-
----
-
-##  Tempos de Acesso
-
-A performance de leitura/escrita é determinada por três fatores:
-
-1. 
-**Seek Time (Procura):** Tempo para o cabeçote chegar à trilha desejada.
-
-
-2. 
-**Rotational Latency (Rotação):** Tempo de espera para o bloco girar até o cabeçote.
-
-
-3. 
-**Transfer Time (Transferência):** Tempo real de leitura ou escrita no bloco.
-
-
+* Discos magnéticos (HD)
+* Memória flash (SSD, pen drive)
+* Discos ópticos (CD, DVD)
+* Fitas magnéticas (acesso sequencial, utilizadas para backup)
 
 ---
 
-## Sistemas de Arquivos
+# 3. Estrutura Física do Disco Rígido
 
-É a parte do SO que organiza os dados logicamente através de arquivos e diretórios.
+A organização física impacta diretamente o desempenho das operações de I/O.
 
-| Sistema | Sistema Operacional |
-| --- | --- |
-| **Ext4** | Linux 
+Componentes:
 
- |
-| **NTFS** | Windows 
-
- |
-
-### Funções do Sistema de Arquivos
-
-* 
-**Baixo Nível:** Gerenciamento de blocos, correção de erros, criptografia e compressão.
-
-
-* 
-**Alto Nível:** Criar, ler, escrever, apagar arquivos e controlar direitos de acesso.
-
-
+* **Prato** – Disco físico onde os dados são armazenados
+* **Trilha** – Círculos concêntricos no prato
+* **Setor** – Menor unidade física de armazenamento
+* **Cilindro** – Conjunto de trilhas de mesmo diâmetro em diferentes pratos
+* **Bloco (ou Página)** – Unidade lógica definida pelo sistema operacional (múltiplo do setor)
 
 ---
 
-## Organização de Registros
+# 4. Operações de Entrada e Saída (I/O)
 
-Um arquivo é uma coleção de registros lógicos, onde cada registro possui campos que descrevem atributos de uma entidade.
+* A transferência de dados entre disco e memória ocorre em blocos.
+* Cada operação de leitura ou escrita corresponde a uma operação de I/O.
+* Um buffer em memória principal é utilizado para armazenar temporariamente o bloco transferido.
 
-Formatos de Registro:
+Processos:
 
-* 
-**Tamanho Fixo:** Campos com tamanho constante em todos os registros.
+* **Leitura:** disco → buffer → memória
+* **Escrita:** memória → buffer → disco
 
+---
 
-* 
-**Tamanho Variável:** Registros podem ter número de campos ou tamanhos de campos distintos.
+# 5. Tempos de Acesso
 
+O tempo total de acesso em discos magnéticos é composto por:
 
+1. **Seek Time (Tempo de Busca)**
+   Deslocamento do cabeçote até a trilha desejada.
 
-Tipos de Organização:
+2. **Rotational Latency (Latência Rotacional)**
+   Espera até o setor desejado girar sob o cabeçote.
 
-1. **Sequencial Desordenado:** Registros na ordem de inserção.
-2. **Sequencial Ordenado:** Registros dispostos conforme uma chave de ordenação.
-3. **Hash:** Acesso direto via cálculo de endereço.
-4. **Indexado:** Estrutura auxiliar (índice) para acesso rápido independente da ordem física.
+3. **Transfer Time (Tempo de Transferência)**
+   Tempo efetivo de leitura ou gravação do bloco.
+
+Tempo Total = Seek Time + Rotational Latency + Transfer Time
+
+---
+
+# 6. Sistema de Arquivos
+
+O sistema de arquivos é responsável por fornecer uma visão lógica e organizada do disco.
+
+## 6.1 Organização Lógica
+
+* Arquivos (unidade básica de dados)
+* Diretórios (estrutura de classificação)
+
+## 6.2 Exemplos de Sistemas
+
+| Sistema | Plataforma |
+| ------- | ---------- |
+| Ext4    | Linux      |
+| NTFS    | Windows    |
+
+---
+
+# 7. Funções do Sistema de Arquivos
+
+## 7.1 Funções de Baixo Nível (SO)
+
+* Gerenciamento de blocos livres e ocupados
+* Gerenciamento de espaço físico
+* Escalonamento de requisições
+* Cache
+* Detecção e correção de erros
+* Criptografia
+* Compressão
+
+## 7.2 Funções de Alto Nível (Usuário)
+
+* Criar, mover e apagar arquivos
+* Ler e escrever dados
+* Manipular diretórios
+* Controlar permissões
+* Realizar backups
+
+---
+
+# 8. Interface com o Sistema
+
+Operações realizadas por chamadas de sistema:
+
+Manipulação de arquivos:
+
+* open
+* close
+* read
+* write
+
+Manipulação de diretórios:
+
+* mkdir
+* rmdir
+* cd
+* ls
+
+Cada processo mantém uma tabela de arquivos abertos, contendo descritores associados aos arquivos.
+
+Exemplo em C:
+
+```c
+FILE *meu_arquivo;
+meu_arquivo = fopen("arquivo.txt", "r");
+```
+
+---
+
+# 9. Atributos de Arquivos (Metadados)
+
+* Data de criação
+* Tamanho
+* Proprietário (ID do usuário)
+* Grupo
+* Permissões (r, w, x)
+* Tipo (arquivo, diretório, link)
+
+---
+
+# 10. Arquivos de Registros
+
+Aplicações frequentemente armazenam dados estruturados na forma de registros.
+
+## 10.1 Conceitos Fundamentais
+
+* **Entidade:** objeto real ou conceitual (ex: aluno, empregado)
+* **Atributo:** característica da entidade (ex: nome, matrícula)
+* **Registro:** conjunto de pares atributo-valor que identificam uma entidade
+* **Arquivo:** coleção de registros lógicos
+
+---
+
+# 11. Terminologia Essencial
+
+* **Registro Lógico:** sequência de campos (atributos)
+* **Registro Físico:** armazenamento do registro lógico em blocos
+* **Chave:** campo ou conjunto de campos identificadores
+* **Chave Primária:** valor único
+* **Chave de Acesso:** utilizada para pesquisa
+* **Chave de Ordenação:** define a sequência física ou lógica
+
+---
+
+# 12. Formato de Registros
+
+## Registro de Tamanho Fixo
+
+* Número fixo de campos
+* Tamanho constante
+
+## Registro de Tamanho Variável
+
+* Campos ou registros podem variar de tamanho
+
+---
+
+# 13. Organização de Arquivos
+
+## 13.1 Organização Primária
+
+Define como os registros são fisicamente armazenados.
+
+* Sequencial Desordenado
+* Sequencial Ordenado
+* Hash (acesso direto)
+
+## 13.2 Organização Secundária
+
+Utiliza estruturas auxiliares (índices) para acesso eficiente.
+
+* Arquivos Indexados
+
+---
+
+# Aplicabilidade Prática
+
+Os conceitos estudados são fundamentais para:
+
+* Implementação de bancos de dados
+* Sistemas de gerenciamento de arquivos
+* Sistemas embarcados
+* Aplicações de alto volume de dados
+* Otimização de algoritmos de busca
 
 ---
