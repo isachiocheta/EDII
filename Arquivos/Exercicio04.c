@@ -3,24 +3,23 @@ arquivo de texto linha por linha e imprima apenas as linhas que começam com uma
 determinada letra ou palavra especificada pelo usuário.*/
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 int main() {
     FILE *arquivo;
     char nome[100];
     char linha[500];
-    char criterio[100];
+    char criterio[50];
 
-    printf("Digite o nome do arquivo: ");
+    printf("Nome do arquivo: ");
     scanf("%s", nome);
 
-    printf("Digite a letra ou palavra inicial: ");
+    printf("Digite a palavra ou letra inicial: ");
     scanf("%s", criterio);
 
     arquivo = fopen(nome, "r");
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
+        printf("Erro ao abrir arquivo.\n");
         return 1;
     }
 
