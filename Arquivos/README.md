@@ -2,7 +2,7 @@
 
 ## Estrutura e Organização de Arquivos
 
-Este repositório apresenta um estudo aprofundado sobre **arquivos, armazenamento de dados e técnicas de organização**, abordando desde a estrutura física do disco até os modelos de organização primária e secundária de arquivos de registros.
+Este repositório apresenta um estudo sobre **arquivos, armazenamento de dados e técnicas de organização**, abordando desde a estrutura física do disco até os modelos de organização primária e secundária de arquivos de registros.
 
 ---
 
