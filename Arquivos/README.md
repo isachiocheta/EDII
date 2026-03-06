@@ -143,6 +143,124 @@ O sistema de arquivos é responsável por fornecer uma visão lógica e organiza
 * Detecção e correção de erros
 * Criptografia
 * Compressão
+<<<<<<< HEAD
+
+## 7.2 Funções de Alto Nível (Usuário)
+
+* Criar, mover e apagar arquivos
+* Ler e escrever dados
+* Manipular diretórios
+* Controlar permissões
+* Realizar backups
+
+---
+
+# 8. Interface com o Sistema
+
+Operações realizadas por chamadas de sistema:
+
+Manipulação de arquivos:
+
+* open
+* close
+* read
+* write
+
+Manipulação de diretórios:
+
+* mkdir
+* rmdir
+* cd
+* ls
+
+Cada processo mantém uma tabela de arquivos abertos, contendo descritores associados aos arquivos.
+
+Exemplo em C:
+
+```c
+FILE *meu_arquivo;
+meu_arquivo = fopen("arquivo.txt", "r");
+```
+
+---
+
+# 9. Atributos de Arquivos (Metadados)
+
+* Data de criação
+* Tamanho
+* Proprietário (ID do usuário)
+* Grupo
+* Permissões (r, w, x)
+* Tipo (arquivo, diretório, link)
+
+---
+
+# 10. Arquivos de Registros
+
+Aplicações frequentemente armazenam dados estruturados na forma de registros.
+
+## 10.1 Conceitos Fundamentais
+
+* **Entidade:** objeto real ou conceitual (ex: aluno, empregado)
+* **Atributo:** característica da entidade (ex: nome, matrícula)
+* **Registro:** conjunto de pares atributo-valor que identificam uma entidade
+* **Arquivo:** coleção de registros lógicos
+
+---
+
+# 11. Terminologia Essencial
+
+* **Registro Lógico:** sequência de campos (atributos)
+* **Registro Físico:** armazenamento do registro lógico em blocos
+* **Chave:** campo ou conjunto de campos identificadores
+* **Chave Primária:** valor único
+* **Chave de Acesso:** utilizada para pesquisa
+* **Chave de Ordenação:** define a sequência física ou lógica
+
+---
+
+# 12. Formato de Registros
+
+## Registro de Tamanho Fixo
+
+* Número fixo de campos
+* Tamanho constante
+
+## Registro de Tamanho Variável
+
+* Campos ou registros podem variar de tamanho
+
+---
+
+# 13. Organização de Arquivos
+
+## 13.1 Organização Primária
+
+Define como os registros são fisicamente armazenados.
+
+* Sequencial Desordenado
+* Sequencial Ordenado
+* Hash (acesso direto)
+
+## 13.2 Organização Secundária
+
+Utiliza estruturas auxiliares (índices) para acesso eficiente.
+
+* Arquivos Indexados
+
+---
+
+# Aplicabilidade Prática
+
+Os conceitos estudados são fundamentais para:
+
+* Implementação de bancos de dados
+* Sistemas de gerenciamento de arquivos
+* Sistemas embarcados
+* Aplicações de alto volume de dados
+* Otimização de algoritmos de busca
+=======
+>>>>>>> 82fe6aad55a6e256d8937aa9710b37ad8d715c1b
 
 ## 7.2 Funções de Alto Nível (Usuário)
 
